@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom"
-import MainPage from "../MainPage/MainPage";
 import CookiesPolicyPage from "../CookiesPolicyPage/CookiesPolicyPage";
 import ExplorePage from "../ExplorePage/ExplorePage";
 import ForgotPasswordPage from "../ForgotPasswordPage/ForgotPasswordPage";
@@ -18,11 +17,10 @@ import TermsPage from "../TermsPage/TermsPage";
 const NavigationPage = ()=> {
     return (
         <Routes>
-            <Route path="/" element={<MainPage/>}/>
             <Route path="/cookies" element={<CookiesPolicyPage/>}/>
             <Route path="/explore" element={<ExplorePage/>}/>
             <Route path="/forgotpassword" element={<ForgotPasswordPage/>}/>
-            <Route path="/home" element={<HomePage/>}/>
+            <Route path="/" element={<HomePage/>}/>
             <Route path="/learnmore" element={<LearnMorePage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/registration" element={<RegistrationPage/>}/>
