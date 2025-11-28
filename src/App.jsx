@@ -1,4 +1,5 @@
 import NavigationPage from "./pages/NavigationPage/NavigationPage"
+import "./styles/style.css"
 
 
 

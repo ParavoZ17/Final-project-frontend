@@ -18,19 +18,19 @@ const NavigationPage = ()=> {
     return (
         <Routes>
             <Route path="/cookies" element={<CookiesPolicyPage/>}/>
-            <Route path="/explore" element={<ExplorePage/>}/>
-            <Route path="/forgotpassword" element={<ForgotPasswordPage/>}/>
+            {/* <Route path="/explore" element={<ExplorePage/>}/> */}
+            <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/learnmore" element={<LearnMorePage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/registration" element={<RegistrationPage/>}/>
-            <Route path="/messages" element={<MessagesPage/>}/>
+            <Route path="/signup" element={<RegistrationPage/>}/>
+            {/* <Route path="/messages" element={<MessagesPage/>}/> */}
             <Route path="*" element={<NotFoundPage/>}/>
-            <Route path="/notification" element={<NotificationPage/>}/>
-            <Route path="/search" element={<SearchPage/>}/>
+            {/* <Route path="/notification" element={<NotificationPage/>}/>
+            <Route path="/search" element={<SearchPage/>}/> */}
             <Route path="/privatpolicy" element={<PrivatcyPolicyPage/>}/>
-            <Route path="/" element={<ProfilePage/>}/>
-            <Route path="/" element={<TermsPage/>}/>
+            {/* <Route path="/profilePage" element={<ProfilePage/>}/> */}
+            <Route path="/terms" element={<TermsPage/>}/>
 
         </Routes>
     )
