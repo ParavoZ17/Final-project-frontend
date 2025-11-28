@@ -1,7 +1,7 @@
 .login_page {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   gap: 2.22vw;
   padding-top: 86px;
 }
