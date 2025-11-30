@@ -1,8 +1,8 @@
 import style from "./LoginPage.module.css";
 
-import backgroundFoto from "../../assets/images/LogoBackground.png";
-import Logo from "../../shared/components/Logo/Logo";
-import LoginForm from "../../modules/LoginForm/LoginForm";
+import backgroundFoto from "../../../assets/images/LogoBackground.png";
+import Logo from "../../../shared/components/Logo/Logo";
+import LoginForm from "../../../modules/LoginForm/LoginForm";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {

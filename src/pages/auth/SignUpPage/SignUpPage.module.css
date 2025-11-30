@@ -1,0 +1,39 @@
+.signUp_page {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 2.22vw;
+  padding-top: 86px;
+}
+
+.mainBlock {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+.signUpForm {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: #dbdbdb solid 1px;
+  padding: 30px 39px 23px 39px;
+  text-align: center;
+}
+
+.signup_block{
+    border: #dbdbdb solid 1px;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    padding: 23px 0 23px 0;
+    a {
+    font-family: 600;
+    color:#0095F6;
+}
+    
+}
+

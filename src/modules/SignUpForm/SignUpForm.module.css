@@ -1,0 +1,28 @@
+.formTitle{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+    margin-bottom: 36px;
+    color:#737373;
+}
+.textFields{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.infoTextContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 27px 0;
+}
+.infoText{
+    font-size: 12px;
+    line-height: 16px;
+    color: #737373;
+    text-align: center;
+    a{
+        color:#00376B;
+    }
+}   

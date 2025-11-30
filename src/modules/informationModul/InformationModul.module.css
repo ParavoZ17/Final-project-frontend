@@ -1,0 +1,23 @@
+.infoBlock{
+    width: 800px;
+    
+    padding: 40px 30px;
+    margin: 50px auto;  
+    border: 1px solid rgb(184, 179, 179);
+    background-color: rgb(243, 246, 250);
+    h1{ 
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+.textBlock{
+    margin-bottom: 30px;
+}
+.btnGroup{
+    display: flex;
+    gap: 20px;
+    button{
+        background-color: gray;
+    }
+}
