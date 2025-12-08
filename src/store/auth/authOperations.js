@@ -16,3 +16,18 @@ export const registerUser = createAsyncThunk(
         }
     }
 )
+
+export const loginUser = createAsyncThunk(
+    "login",
+    async(payload, {rejectWithValue}) => {
+        try {
+            const data = await authApi.login(payload);
+            return data;
+        }
+        catch(error) {
+            return rejectWithValue({
+                email: error?.response?.data.message || error?.message
+            });
+        }
+    }
+)
