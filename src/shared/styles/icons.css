@@ -1,0 +1,8 @@
+.icon_hover path {
+  transition: 0.2s ease;
+}
+
+    .icon_hover:hover path {
+    fill: #000000;
+  stroke: white ;
+}

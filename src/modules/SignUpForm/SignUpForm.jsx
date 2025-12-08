@@ -1,22 +1,41 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+
 import TextField from "../../shared/components/TextField/TextField";
 import Button from "../../shared/components/Button/Button";
 import { Link } from "react-router-dom";
 import style from "./SignUpForm.module.css";
 
-const LoginForm = ({ onSubmit }) => {
-  const {
+const SignUpForm = ({ requestErrors, isSubmitSuccess,onSubmit }) => {
+   const {
     register,
     handleSubmit,
+    setError,
     reset,
-    formState: { errors }
+    formState: { errors },
   } = useForm();
+
+    useEffect(()=> {
+    if(requestErrors) {
+        for(const key in requestErrors) {
+            setError(key, {
+                message: requestErrors[key],
+            });
+        }
+    }
+  }, [requestErrors, setError])
+
+  useEffect(()=> {
+    if(isSubmitSuccess) {
+        reset();
+    }
+  }, [isSubmitSuccess, reset]);
 
   const handleFormSubmit = (values) => {
     if (onSubmit) {
       onSubmit(values); 
     }
-    reset();
+
   };
 
   return (
@@ -36,9 +55,9 @@ from your friends.</p>
        <TextField
         register={register}
         rules={{ required: "Full Name required" }}
-        name="name"
+        name="fullname"
         placeholder="Full Name"
-        error={errors.name}
+        error={errors.fullname}
   
       />
       <TextField
@@ -67,7 +86,7 @@ from your friends.</p>
 
             <p className={style.infoText}>
               By signing up, you agree to our <Link to="/terms">Terms</Link>,{" "}
-              <Link to="/privacy">Privacy Policy</Link> and{" "}
+              <Link to="/privacy">Privacy Policy</Link> and
               <Link to="/cookies">Cookies Policy</Link>.
             </p>
         </div>
@@ -76,4 +95,4 @@ from your friends.</p>
   );
 };
 
-export default LoginForm;
+export default SignUpForm;

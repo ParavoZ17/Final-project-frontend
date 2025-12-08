@@ -1,7 +1,7 @@
 @import url("./reset.css");
 @import url("./fonts.css");
 @import url("./variables.css");
-
+@import url("./icons.css");
 
 
 * {
@@ -12,5 +12,4 @@ body{
  font-family: "Roboto", sans-serif;
  max-width: 1440px;
 }
-
 
