@@ -9,6 +9,7 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import PrivatcyPolicyPage from "../auth/documentation/PrivatcyPolicyPage/PrivatcyPolicyPage";
 import TermsPage from "../auth/documentation/TermsPage/TermsPage";
 import PublicRoute from "../../shared/components/PublicRoute/PublicRoute";
+import PrivatRoute from "../../shared/components/PrivatRoute/PrivatRoute";
 
 const NavigationPage = ()=> {
     return (
@@ -17,13 +18,14 @@ const NavigationPage = ()=> {
                  <Route path="/signup" element={<SignUpPage/>}/>
                  <Route path="/login" element={<LoginPage/>}/>
             </Route>
-           <Route path="/learnmore" element={<LearnMorePage/>}/>
+            <Route element={<PrivatRoute/>}>
+                 <Route path="/learnmore" element={<LearnMorePage/>}/>
             <Route path="/cookies" element={<CookiesPolicyPage/>}/>
             <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
             <Route path="/privacy" element={<PrivatcyPolicyPage/>}/>
             <Route path="/terms" element={<TermsPage/>}/>
-
             <Route path="/" element={<HomePage/>}/>
+            </Route>
             
             <Route path="*" element={<NotFoundPage/>}/>
             
