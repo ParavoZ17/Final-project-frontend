@@ -6,3 +6,8 @@ export const selectAuthRequest = (store) => {
     isRegisterSuccess: store.auth.isRegisterSuccess,
   };
 };
+
+
+export const selectToken = store => Boolean (store.auth.accessToken)
+
+export const selectUser = store => store.auth.user;

@@ -25,9 +25,9 @@ const LoginForm = ({ onSubmit }) => {
       <TextField
         register={register}
         rules={{ required: "Username or email required" }}
-        name="username"
+        name="identifier"
         placeholder="Username or email"
-        error={errors.username}
+        error={errors.identifier}
       />
       <TextField
         register={register}

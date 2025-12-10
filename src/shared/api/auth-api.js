@@ -1,18 +1,29 @@
-import axios from "axios";
+import instance from "./instance";
+
+export const register = async (payload) => {
+  const { data } = await instance.post("/auth/register", payload);
+  return data;
+};
+
+export const login = async (payload) => {
+  const { data } = await instance.post("/auth/login", payload);
+  instance.defaults.headers["Authorization"] = `Bearer  ${payload.accessToken}`
+  return data;
+};
 
 
-const authInstance = axios.create({
-    
-    baseURL: import.meta.env.VITE_API_URL
+export const logout = async () => {
+  await instance.post("/auth/logout");
+  instance.defaults.headers["Authorization"] = ``
+
+}; 
+
+export const getCurrent = async (token) => {
+const { data } = await instance.get("/auth/current", {
+  headers: {
+    "Authorization" : `Bearer ${token}`,
+  }
 });
-
-export const register = async payload => {
-    const {data} = await authInstance.post("/auth/register", payload);
-    return data;
-}
-
-
-export const login = async payload => {
-    const {data} = await authInstance.post("/auth/login", payload);
-    return data;
-}
+  instance.defaults.headers["Authorization"] = ``
+return data;
+};
