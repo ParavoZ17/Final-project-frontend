@@ -58,12 +58,13 @@ const authSlice = createSlice({
       })
       .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
         state.loading = false;
+
         state.user = payload.user;
       })
       .addCase(getCurrentUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
-        console.log(payload)
+        
       });
     builder
       .addCase(logoutUser.pending, (state) => {
@@ -83,12 +84,13 @@ const authSlice = createSlice({
     builder
   .addCase(refreshUser.fulfilled, (state, { payload }) => {
     state.accessToken = payload.accessToken;
-    state.refreshToken = payload.refreshToken;
     instance.defaults.headers["Authorization"] = `Bearer ${payload.accessToken}`;
   })
   .addCase(refreshUser.rejected, (state, { payload }) => {
+     state.loading = false;
     state.error = payload;
-    return  state.accessToken ;
+    state.accessToken = null;
+  state.refreshToken = null;
   });
 
   },

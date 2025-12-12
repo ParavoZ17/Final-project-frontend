@@ -10,7 +10,7 @@ instance.interceptors.response.use(
   (res) => res,
   async (error) => {
     const originalRequest = error.config;
-
+    
     if (
       error.response?.status === 401 &&
       error.response?.data?.message === "accessToken expired"
@@ -23,7 +23,7 @@ instance.interceptors.response.use(
       if (refreshUser.fulfilled.match(result)) {
         originalRequest.headers["Authorization"] =
           "Bearer " + result.payload.accessToken;
-
+        
         return instance(originalRequest);
       }
 
