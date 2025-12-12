@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  gap: 44px;
+  padding: 94px 184px 0 119px;
+  line-height: 1.2;
+  margin: 0 auto;
+}
+
+.text_container {
+    padding-top: 47px;
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  p {
+    max-width: 473px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #737373;
+  }
+}

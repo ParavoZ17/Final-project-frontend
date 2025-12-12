@@ -1,5 +1,7 @@
+import Sidebar from "../../modules/Sidebar/Sidebar";
+
 const HomePage = () =>{
-return <>Home Page</>
+return <></>
 }
 
 export default HomePage;

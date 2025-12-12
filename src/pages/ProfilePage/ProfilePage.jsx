@@ -1,7 +1,3 @@
-
-
-
-
 const ProfilePage = () =>{
 return <>ProfilePage</>
 }

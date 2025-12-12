@@ -3,20 +3,22 @@ import "./shared/styles/style.css"
 
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { selectToken } from "./store/auth/authSelector"
+import { selectRefreshToken, selectToken } from "./store/auth/authSelector"
 
 import { getCurrentUser } from "./store/auth/authOperations"
 
 function App() {
-  
+  const token = useSelector(selectRefreshToken)
+  console.log(token)
 const isToken = useSelector(selectToken)
+
 const dispatch = useDispatch()
 
 useEffect(()=>{
 if(isToken){
   dispatch(getCurrentUser())
 }
-},[dispatch,isToken ])
+},[dispatch,isToken])
   return (
     <>
      <NavigationPage/>
@@ -25,3 +27,4 @@ if(isToken){
 }
 
 export default App
+

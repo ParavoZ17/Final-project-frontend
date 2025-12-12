@@ -1,5 +1,6 @@
-// instance.js
+
 import axios from "axios";
+import { refreshUser } from "../../store/auth/authOperations.js";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -10,25 +11,30 @@ instance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // ⚠️ Обрати внимание: правильная проверка ошибки
     if (
       error.response?.status === 401 &&
       error.response?.data?.message === "accessToken expired"
     ) {
-      // ленивый импорт store, чтобы не создавать цикл при загрузке модулей
       const { store } = await import("../../store/store.js");
-      const { auth } = store.getState();
 
-      const { data } = await instance.post("/auth/refresh", {
-        refreshToken: auth.refreshToken,
-      });
+      const result = await store.dispatch(refreshUser());
 
-      instance.defaults.headers["Authorization"] = `Bearer ${data.accessToken}`;
-      return instance(originalRequest);
+
+      if (refreshUser.fulfilled.match(result)) {
+        originalRequest.headers["Authorization"] =
+          "Bearer " + result.payload.accessToken;
+
+        return instance(originalRequest);
+      }
+
+
+      return Promise.reject(result.payload);
     }
 
     return Promise.reject(error);
   }
 );
 
+
 export default instance;
+
