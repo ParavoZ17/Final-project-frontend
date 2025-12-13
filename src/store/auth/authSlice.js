@@ -5,7 +5,7 @@ import {
   loginUser,
   getCurrentUser,
   logoutUser,
-  refreshUser
+  refreshUser,
 } from "./authOperations";
 
 import instance from "../../shared/api/instance";
@@ -64,7 +64,6 @@ const authSlice = createSlice({
       .addCase(getCurrentUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
-        
       });
     builder
       .addCase(logoutUser.pending, (state) => {
@@ -72,7 +71,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(logoutUser.fulfilled, () => {
-        return {...initialState}
+        return { ...initialState };
       })
       .addCase(logoutUser.rejected, (state, { payload }) => {
         state.loading = false;
@@ -82,19 +81,24 @@ const authSlice = createSlice({
         state.refreshToken = null;
       });
     builder
-  .addCase(refreshUser.fulfilled, (state, { payload }) => {
-    state.accessToken = payload.accessToken;
-    instance.defaults.headers["Authorization"] = `Bearer ${payload.accessToken}`;
-  })
-  .addCase(refreshUser.rejected, (state, { payload }) => {
-     state.loading = false;
-    state.error = payload;
-    state.accessToken = null;
-  state.refreshToken = null;
-  });
-
+      .addCase(refreshUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(refreshUser.fulfilled, (state, { payload }) => {
+        state.accessToken = payload.accessToken;
+        instance.defaults.headers[
+          "Authorization"
+        ] = `Bearer ${payload.accessToken}`;
+      })
+      .addCase(refreshUser.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+        state.accessToken = null;
+        state.refreshToken = null;
+        state.user = null;
+      });
   },
 });
 
 export default authSlice.reducer;
-

@@ -5,7 +5,7 @@ import "./Sidebar.module.css"; // Стилі для іконок та сайдб
 import Logo from "../../shared/components/Logo/Logo";
 import HomeIcon from "../../assets/svg/Home";
 import SearchIcon from "../../assets/svg/Search";
-import MessengerIcon from "../../assets/svg/Messemger";
+import MessengerIcon from "../../assets/svg/Messenger";
 import NotificationIcon from "../../assets/svg/Notifications";
 import CreatePostIcon from "../../assets/svg/CreatePost";
 
