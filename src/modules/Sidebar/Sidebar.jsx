@@ -3,11 +3,19 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Sidebar.module.css"; // Стилі для іконок та сайдбару
 import Logo from "../../shared/components/Logo/Logo";
-import HomeIcon from "../../assets/svg/Home";
-import SearchIcon from "../../assets/svg/Search";
-import MessengerIcon from "../../assets/svg/Messenger";
-import NotificationIcon from "../../assets/svg/Notifications";
-import CreatePostIcon from "../../assets/svg/CreatePost";
+import {
+  HomeIcon,
+  HomeIconActive,
+  SearchIcon,
+  SearchIconActive,
+  ExploreIcon,
+  ExploreIconActive,
+  MessagesIcon,
+  MessagesIconActive,
+  NotificationsIcon,
+  NotificationsIconActive,
+  CreatePostIcon
+} from '../../assets/svg'
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -32,18 +40,18 @@ const Sidebar = () => {
         </div>
 
         <div className={style.sidebar_item} onClick={() => navigate("/explore")}>
-          <MessengerIcon/> Explore
+          <ExploreIcon/> Explore
         </div>
 
         <div className={style.sidebar_item} onClick={() => navigate("/messages")}>
-          <MessengerIcon/> Messages
+          <MessagesIcon/> Messages
         </div>
 
         <div
           className={style.sidebar_item}
           onClick={() => setIsNotificationsOpen(true)}
         >
-          <NotificationIcon/> Notifications
+          <NotificationsIcon/> Notifications
         </div>
 
         <div className={style.sidebar_item} onClick={() => navigate("/create")}>

@@ -4,12 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import style from "./InformationModul.module.css";
 
-import HomeIcon from "../../assets/svg/Home";
-import CreatePostIcon from "../../assets/svg/CreatePost";
-import MessengerIcon from "../../assets/svg/Messemger";
-import NotificationIcon from "../../assets/svg/Notifications";
-import SearchIcon from "../../assets/svg/Search";
-
 const InformationModul = ({ type }) => {
     const navigate = useNavigate();
 
@@ -44,7 +38,6 @@ const InformationModul = ({ type }) => {
       <div className={style.btnGroup}>      <Button onClick={()=>{goToPage("main")}}>Home</Button>
       <Button onClick={()=>{goToPage("signup")}}>Sign up</Button>
        </div>
-       <HomeIcon/><CreatePostIcon/><MessengerIcon/><NotificationIcon/><SearchIcon/>
     </div>
   );
 };
