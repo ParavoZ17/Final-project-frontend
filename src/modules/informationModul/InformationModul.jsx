@@ -3,6 +3,7 @@ import Button from "../../shared/components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
 import style from "./InformationModul.module.css";
+import Footer from "../Footer/Footer";
 
 const InformationModul = ({ type }) => {
     const navigate = useNavigate();
@@ -35,9 +36,10 @@ const InformationModul = ({ type }) => {
         <h1>{info[type].title}</h1>
         <p>{info[type].text}</p>
       </div>
-      <div className={style.btnGroup}>      <Button onClick={()=>{goToPage("main")}}>Home</Button>
-      <Button onClick={()=>{goToPage("signup")}}>Sign up</Button>
+      <div className={style.btnGroup}>     
+     <Button onClick={()=>{goToPage("")}}>Go back</Button>
        </div>
+       <Footer/>
     </div>
   );
 };
