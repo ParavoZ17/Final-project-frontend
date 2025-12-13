@@ -1,7 +1,13 @@
-// Sidebar.jsx
+import style from "./Sidebar.module.css"
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Sidebar.module.css"; // Стилі для іконок та сайдбару
+import Logo from "../../shared/components/Logo/Logo";
+import HomeIcon from "../../assets/svg/Home";
+import SearchIcon from "../../assets/svg/Search";
+import MessengerIcon from "../../assets/svg/Messemger";
+import NotificationIcon from "../../assets/svg/Notifications";
+import CreatePostIcon from "../../assets/svg/CreatePost";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -10,50 +16,49 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="sidebar">
-        <div className="logo" onClick={() => navigate("/")}>
-          ICHGRAM
-        </div>
+      <div className={style.sidebar}>
+        <Logo className={style.logo} onClick={() => navigate("/")} type="sidebar">
+        </Logo>
 
-        <div className="sidebar-item" onClick={() => navigate("/")}>
-          <span>🏠</span> Home
+        <div className={style.sidebar_item} onClick={() => navigate("/")}>
+          <HomeIcon/> Home
         </div>
 
         <div
-          className="sidebar-item"
+          className={style.sidebar_item}
           onClick={() => setIsSearchOpen(true)}
         >
-          <span>🔍</span> Search
+          <SearchIcon/> Search
         </div>
 
-        <div className="sidebar-item" onClick={() => navigate("/explore")}>
-          <span>🧭</span> Explore
+        <div className={style.sidebar_item} onClick={() => navigate("/explore")}>
+          <MessengerIcon/> Explore
         </div>
 
-        <div className="sidebar-item" onClick={() => navigate("/messages")}>
-          <span>💬</span> Messages
+        <div className={style.sidebar_item} onClick={() => navigate("/messages")}>
+          <MessengerIcon/> Messages
         </div>
 
         <div
-          className="sidebar-item"
+          className={style.sidebar_item}
           onClick={() => setIsNotificationsOpen(true)}
         >
-          <span>❤️</span> Notifications
+          <NotificationIcon/> Notifications
         </div>
 
-        <div className="sidebar-item" onClick={() => navigate("/create")}>
-          <span>➕</span> Create
+        <div className={style.sidebar_item} onClick={() => navigate("/create")}>
+          <CreatePostIcon/> Create
         </div>
 
-        <div className="sidebar-item" onClick={() => navigate("/profile")}>
-          <span>👤</span> Profile
+        <div className={style.sidebar_item} onClick={() => navigate("/profile")}>
+          <div className={style.profile}></div> Profile
         </div>
       </div>
 
       {/* Модальне вікно для Search */}
       {isSearchOpen && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className={style.modal}>
+          <div className={style.modal_content}>
             <button onClick={() => setIsSearchOpen(false)}>Закрити</button>
             <h3>Search</h3>
             <input type="text" placeholder="Search users or posts..." />
@@ -63,8 +68,8 @@ const Sidebar = () => {
 
       {/* Модальне вікно для Notifications */}
       {isNotificationsOpen && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className={style.modal}>
+          <div className={style.modal_content}>
             <button onClick={() => setIsNotificationsOpen(false)}>Закрити</button>
             <h3>Notifications</h3>
             <ul>

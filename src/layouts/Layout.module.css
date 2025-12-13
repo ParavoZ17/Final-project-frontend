@@ -1,0 +1,17 @@
+.container{
+    position: relative;
+}
+.content{
+    display: flex;
+}
+
+.logout_btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    padding: 7px 10px;
+    background-color: #EFEFEF;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+}

@@ -7,7 +7,7 @@ const Logo = ({ type = "auth" }) => {
       <img
         src={logoPng}
         alt="Logo"
-        className={`${styles.logoImg} ${styles[type]}`}
+        className={`${styles[type]}`}
       />
     </div>
   );

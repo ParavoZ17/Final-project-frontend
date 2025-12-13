@@ -32,7 +32,7 @@ const { data } = await instance.get("/auth/current", {
     "Authorization" : `Bearer ${token}`,
   }
 });
-  // instance.defaults.headers["Authorization"] = ``
+
 return data;
 };
 

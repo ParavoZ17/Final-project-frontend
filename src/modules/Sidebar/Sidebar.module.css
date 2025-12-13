@@ -1,44 +1,42 @@
 .sidebar {
-  width: 200px;
-  padding: 20px;
+  width: 245px;
+  padding: 28px 25px;
   border-right: 1px solid #ccc;
 }
 
-.sidebar-item {
+.sidebar_item {
   display: flex;
-  align-items: center;
+  align-items: center;  
   padding: 10px 0;
   cursor: pointer;
   gap: 10px;
+  line-height: 1.2;
 }
 
-.sidebar-item:hover {
+.sidebar_item:hover {
   background-color: #f0f0f0;
 }
 
-.logo {
-  font-family: 'Brush Script MT', cursive;
-  font-size: 24px;
-  margin-bottom: 20px;
-  cursor: pointer;
+.profile{
+  padding: 12px;
+  border-radius: 50%;
+  background-color: blue;
 }
 
 /* Модальне вікно */
 .modal {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 245px;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  
 }
 
-.modal-content {
-  background: white;
+.modal_content {
+  background: rgb(241, 237, 237);
   padding: 20px;
   border-radius: 8px;
-  width: 300px;
+  width: 245px;
 }
