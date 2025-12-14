@@ -57,8 +57,7 @@ export const getCurrentUser = createAsyncThunk(
           
             const {auth} = getState();
           
-            const data = await authApi.getCurrent(auth.accessToken);
-            console.log(data)
+            const data = await authApi.getCurrent(auth.accessToken)
             return data;
         }
         catch(error) {
