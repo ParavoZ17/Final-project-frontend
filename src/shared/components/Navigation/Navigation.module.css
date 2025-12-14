@@ -1,0 +1,52 @@
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 10px 10px;
+    border-radius: 12px;
+
+    text-decoration: none;
+    color: #111;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 400;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.nav a:last-child {
+    margin-top: 47px;
+}
+
+.profileButton {
+    margin-top: 47px;
+}
+
+.item:hover {
+    background: #f5f5f5;
+}
+
+.active {
+    font-weight: 700;
+}
+
+.icon {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    display: block;
+}
+
+.profile {
+    padding: 12px;
+    border-radius: 50%;
+    background-color: blue;
+}

@@ -21,10 +21,10 @@ if(isToken){
 },[dispatch,isToken])
   return (
     <div style={{
-    maxWidth: "1440px",
+    // maxWidth: "1440px",
     margin: "0 auto",
     width: "100%",
-    backgroundColor: "#eae9e9ff",
+    backgroundColor: "#ffffff",
   }}>
      <NavigationPage/>
     </div>

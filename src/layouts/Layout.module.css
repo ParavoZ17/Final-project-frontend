@@ -1,7 +1,12 @@
-.container{
+.main {
+    width: 100%;
+}
+
+.container {
     position: relative;
 }
-.content{
+
+.content {
     display: flex;
 }
 
