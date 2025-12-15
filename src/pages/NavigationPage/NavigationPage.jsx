@@ -30,7 +30,7 @@ const NavigationPage = () => {
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/create" element={<CreatePostPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/me" element={<ProfilePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>

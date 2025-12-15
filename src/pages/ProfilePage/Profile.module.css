@@ -57,7 +57,28 @@
     padding: 0 14px;
     border-radius: 8px;
     border: 1px solid #e5e7eb;
-    background: #f3f4f6;
+    background: #efefef;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.followBtn {
+    height: 32px;
+    padding: 0 45px;
+    color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #0095f6;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.messageBtn {
+    height: 32px;
+    padding: 0 55px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #efefef;
     font-weight: 600;
     cursor: pointer;
 }

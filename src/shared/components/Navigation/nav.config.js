@@ -63,7 +63,7 @@ export const NAV_ITEMS = [
   },
   {
     type: "route",
-    to: "/profile",
+    to: "/me",
     label: "Profile",
     icon: ProfileIcon,
     iconActive: ProfileIconActive,
