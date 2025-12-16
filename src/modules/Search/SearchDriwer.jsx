@@ -1,4 +1,4 @@
-import DrawerShell from "../../shared/components/Modal/DrawerShell";
+import DrawerShell from "../../shared/components/ModalMenu/DrawerShell";
 import SearchPanel from "./SearchPanel";
 
 const SearchDrawer =  ({ open, onClose }) => {

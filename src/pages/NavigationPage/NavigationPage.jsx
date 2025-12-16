@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import CookiesPolicyPage from "../auth/documentation/CookiesPolicyPage/CookiesPolicyPage";
 import ForgotPasswordPage from "../auth/ForgotPasswordPage/ForgotPasswordPage";
 import HomePage from "../HomePage/HomePage";
@@ -12,11 +13,14 @@ import PublicRoute from "../../shared/components/PublicRoute/PublicRoute";
 import PrivatRoute from "../../shared/components/PrivatRoute/PrivatRoute";
 import ExplorePage from "../ExplorePage/ExplorePage";
 import MessagesPage from "../MessagesPage/MessagesPage";
-import CreatePostPage from "../CreatePostPage/CreatePostPage";
 import ProfilePage from "../ProfilePage/ProfilePage";
+import EditProfilePage from "../ProfilePage/EditProfilePage.jsx";
 import Layout from "../../layouts/Layout";
+import {selectUser} from "../../store/auth/authSelector";
 
 const NavigationPage = () => {
+  const authUser  = useSelector(selectUser);
+
   return (
     <Routes>
       <Route element={<PublicRoute />}>
@@ -29,8 +33,16 @@ const NavigationPage = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/messages" element={<MessagesPage />} />
-          <Route path="/create" element={<CreatePostPage />} />
-          <Route path="/me" element={<ProfilePage />} />
+          <Route path="/profile/edit" element={<EditProfilePage />} />
+          <Route path="/profile/:username" element={<ProfilePage />} />
+          <Route
+            path="/me"
+            element={
+              authUser
+                ? <Navigate to={`/profile/${authUser.username}`} replace />
+                : <Navigate to="/login" replace />
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>

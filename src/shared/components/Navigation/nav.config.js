@@ -10,9 +10,10 @@ import {
   NotificationsIcon,
   NotificationsIconActive,
   CreatePostIcon,
-  ProfileIcon,
-  ProfileIconActive
+ UserAvatar
 } from '../../../assets/svg/index'
+
+
 
 export const NAV_ITEMS = [
   {
@@ -54,18 +55,18 @@ export const NAV_ITEMS = [
     modalTitle: "Notifications",
   },
   {
-    type: "panel",
-    key: "create",
-    label: "Create",
-    icon: CreatePostIcon,
-    iconActive: CreatePostIcon,
-    modalTitle: "Create post",
-  },
+  type: "panel",
+  key: "create",
+  action: "post-modal", 
+  label: "Create",
+  icon: CreatePostIcon,
+  iconActive: CreatePostIcon,
+},
   {
     type: "route",
     to: "/me",
     label: "Profile",
-    icon: ProfileIcon,
-    iconActive: ProfileIconActive,
+    icon: UserAvatar,
+    iconActive: UserAvatar,
   },
 ];

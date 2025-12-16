@@ -1,10 +1,17 @@
-import {NavLink, useLocation} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {NAV_ITEMS} from "./nav.config.js";
+import { NavLink, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NAV_ITEMS } from "./nav.config.js";
 import style from "./Navigation.module.css";
-import {selectUser} from "../../../store/auth/authSelector";
+import { selectUser } from "../../../store/auth/authSelector";
 
-const Navigation = ({openPanel, closePanel, activePanel, pendingRoute, setPendingRoute}) => {
+const Navigation = ({
+  openPanel,
+  closePanel,
+  activePanel,
+  pendingRoute,
+  setPendingRoute,
+  openPostModal,
+}) => {
   const location = useLocation();
   const authUser = useSelector(selectUser);
   const myProfilePath = authUser ? `/profile/${authUser.username}` : null;
@@ -22,7 +29,8 @@ const Navigation = ({openPanel, closePanel, activePanel, pendingRoute, setPendin
 
             if (pendingRoute) return item.to === pendingRoute;
 
-            if (item.label === "Profile") return location.pathname === myProfilePath;
+            if (item.label === "Profile")
+              return location.pathname === myProfilePath;
 
             return !activePanel && routerIsActive;
           };
@@ -32,7 +40,7 @@ const Navigation = ({openPanel, closePanel, activePanel, pendingRoute, setPendin
               key={key}
               to={item.type === "route" ? item.to : "#"}
               end={item.end}
-              className={({isActive}) => {
+              className={({ isActive }) => {
                 const active = getIsActive(isActive);
                 return `${style.item} ${active ? style.active : ""}`;
               }}
@@ -40,7 +48,15 @@ const Navigation = ({openPanel, closePanel, activePanel, pendingRoute, setPendin
                 if (item.type === "panel") {
                   e.preventDefault();
                   setPendingRoute(null);
+                  
+                  if (item.action === "post-modal") {
+                    closePanel();
+                    openPostModal("create");
+                    return;
+                  }
+
                   activePanel === item.key ? closePanel() : openPanel(item.key);
+
                   return;
                 }
 
@@ -50,13 +66,13 @@ const Navigation = ({openPanel, closePanel, activePanel, pendingRoute, setPendin
                 }
               }}
             >
-              {({isActive}) => {
+              {({ isActive }) => {
                 const active = getIsActive(isActive);
                 const Icon = active ? item.iconActive : item.icon;
 
                 return (
                   <>
-                    <Icon className={style.icon}/>
+                    <Icon className={style.icon} />
                     <span className={style.label}>{item.label}</span>
                   </>
                 );
@@ -67,6 +83,6 @@ const Navigation = ({openPanel, closePanel, activePanel, pendingRoute, setPendin
       </nav>
     </>
   );
-}
+};
 
 export default Navigation;

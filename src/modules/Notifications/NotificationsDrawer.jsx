@@ -1,4 +1,4 @@
-import DrawerShell from "../../shared/components/Modal/DrawerShell";
+import DrawerShell from "../../shared/components/ModalMenu/DrawerShell";
 import NotificationsPanel from "./NotificationsPanel";
 
 const NotificationsDrawer = ({open, onClose}) => {

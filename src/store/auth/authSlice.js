@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 import {
   registerUser,
@@ -22,6 +22,13 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    updateAuthUser(state, action) {
+      if (state.user) {
+        state.user = {...state.user, ...action.payload};
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -60,6 +67,9 @@ const authSlice = createSlice({
         state.loading = false;
 
         state.user = payload.user;
+        instance.defaults.headers[
+          "Authorization"
+          ] = `Bearer ${payload.accessToken}`;
       })
       .addCase(getCurrentUser.rejected, (state, { payload }) => {
         state.loading = false;
@@ -101,4 +111,5 @@ const authSlice = createSlice({
   },
 });
 
+export const {updateAuthUser} = authSlice.actions;
 export default authSlice.reducer;

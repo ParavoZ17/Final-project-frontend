@@ -14,7 +14,7 @@ export const login = async (payload) => {
 
 
   export const logout = async (token) => {
-    console.log(token)
+    
     await instance.post("/auth/logout", null, {
       headers: {
         Authorization: `Bearer ${token}`,

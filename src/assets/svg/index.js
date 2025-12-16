@@ -10,7 +10,7 @@ import NotificationsIcon from "./Notifications.jsx";
 import NotificationsIconActive from "./NotificationsActive.jsx";
 import CreatePostIcon from "./CreatePost.jsx";
 import ProfileIcon from "./Profile.jsx";
-import ProfileIconActive from "./ProfileActive.jsx";
+import UserAvatar from "./UserAvatar.jsx";
 
 export {
   HomeIcon,
@@ -24,6 +24,5 @@ export {
   NotificationsIcon,
   NotificationsIconActive,
   CreatePostIcon,
-  ProfileIcon,
-  ProfileIconActive,
+  UserAvatar
 }
