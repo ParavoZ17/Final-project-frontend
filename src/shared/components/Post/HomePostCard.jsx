@@ -1,13 +1,19 @@
+import {useOutletContext} from "react-router-dom";
 import ProfileIcon from "../../../assets/svg/Profile";
 import style from "./HomePostCard.module.css";
+import {LikeIcon, CommentsIcon} from "../../../assets/svg"
+import ViewPost  from "./ViewPost/ViewPost";
 
-const HomePostCard = ({ post }) => {
+
+const HomePostCard = ({post}) => {
+  const {openModal} = useOutletContext();
+
   return (
     <article className={style.card}>
 
       <div className={style.header}>
         <div className={style.user}>
-          <ProfileIcon avatarUrl = {post.author.avatar} size = {26}/>
+          <ProfileIcon avatarUrl={post.author.avatar} size={26}/>
           <span className={style.username}>
             {post.author?.username || "user"}
           </span>
@@ -20,15 +26,17 @@ const HomePostCard = ({ post }) => {
 
       {post.images?.length > 0 && (
         <div className={style.imageWrap}>
-          <img src={post.images[0]} alt="" />
+          <img src={post.images[0]} alt=""/>
         </div>
       )}
 
       {/* actions */}
       <div className={style.actions}>
         <div className={style.left}>
-          <span>♡</span>
-          <span>💬</span>
+          <span><LikeIcon active={post.isLiked}/></span>
+          <span onClick={() => openModal("create", ViewPost, {post})}>
+            <CommentsIcon stroke='black'/>
+          </span>
         </div>
       </div>
 
@@ -43,7 +51,7 @@ const HomePostCard = ({ post }) => {
           {post.content}
         </div>
 
-        <div className={style.more}>
+        <div className={style.more} onClick={() => openModal("create", ViewPost, {post})}>
           View all comments ({post.commentsCount})
         </div>
       </div>

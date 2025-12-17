@@ -4,10 +4,9 @@ import { useLocation } from "react-router-dom";
 import style from "./Sidebar.module.css"
 import Logo from "../../shared/components/Logo/Logo";
 import Navigation from "../../shared/components/Navigation/Navigation.jsx";
-import Modal from "../../shared/components/ModalMenu/Modal.jsx"
 
 
-const Sidebar = ({openPanel, closePanel, activePanel, openPostModal}) => {
+const Sidebar = ({openPanel, closePanel, activePanel, openModal, closeModal}) => {
   const location = useLocation();
   const [pendingRoute, setPendingRoute] = useState(null);
 
@@ -19,7 +18,7 @@ const Sidebar = ({openPanel, closePanel, activePanel, openPostModal}) => {
 
   return (
     <>
-      <div className={style.sidebar}>
+      <div className={style.sidebar} onClick={() => closeModal()}>
         <Logo
           closePanel={closePanel}
           activePanel={activePanel}
@@ -32,7 +31,7 @@ const Sidebar = ({openPanel, closePanel, activePanel, openPostModal}) => {
           activePanel={activePanel}
           pendingRoute={pendingRoute}
           setPendingRoute={setPendingRoute}
-          openPostModal={openPostModal}
+          openModal={openModal}
         />
       </div>
     </>

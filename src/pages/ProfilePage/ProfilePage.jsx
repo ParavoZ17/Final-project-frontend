@@ -36,6 +36,7 @@ const ProfilePage = () => {
       setIsMe(user?.id === authUser?.id);
       setProfile(user);
       setIsLoading(false);
+    console.log(user)
     };
 
     fetchUser();

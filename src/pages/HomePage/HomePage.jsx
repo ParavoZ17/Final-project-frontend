@@ -1,7 +1,6 @@
-
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchAllPosts, fetchPostById} from "../../store/posts/postsOperations";
+import {fetchAllPosts} from "../../store/posts/postsOperations";
 import LoadingOverlay from "../../shared/components/Loading/LoadingOverlay";
 import HomePostCard from "../../shared/components/Post/HomePostCard";
 
@@ -15,11 +14,6 @@ const HomePage = () => {
     dispatch(fetchAllPosts());
   }, [dispatch]);
 
-  const handleClickPost = (postId) => {
-    dispatch(fetchPostById(postId));
-   
-  };
-
   return (
     <div className={style.page}>
       <div className={style.feed}>
@@ -29,7 +23,6 @@ const HomePage = () => {
           <HomePostCard
             key={post.id}
             post={post}
-            onClick={() => handleClickPost(post._id)}
           />
         ))}
       </div>
@@ -38,5 +31,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-

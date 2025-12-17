@@ -62,10 +62,13 @@
     padding: 8px 0;
 }
 
-.left span {
-    font-size: 20px;
-    margin-right: 12px;
-    cursor: pointer;
+.left {
+    display: flex;
+    gap: 12px;
+}
+
+.left span{
+   cursor: pointer;
 }
 
 .content {

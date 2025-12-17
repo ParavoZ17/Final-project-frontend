@@ -1,39 +1,35 @@
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import {useState} from "react";
+import {Outlet} from "react-router-dom";
 import Sidebar from "../modules/Sidebar/Sidebar";
 import Footer from "../modules/Footer/Footer";
 import SearchDrawer from "../modules/Search/SearchDriwer.jsx";
 import NotificationsDrawer from "../modules/Notifications/NotificationsDrawer.jsx";
 
-import { useDispatch } from "react-redux";
-import { logoutUser } from "../store/auth/authOperations";
+import {useDispatch} from "react-redux";
+import {logoutUser} from "../store/auth/authOperations";
 
 import style from "./Layout.module.css";
 
-// 👇 Новий пост-модал
 import PostModal from "../shared/components/PostModal/PostModal";
-import CreatePost from "../shared/components/Post/CreatePost/CreatePost.jsx";
 
 const Layout = () => {
   const dispatch = useDispatch();
 
-  // Для drawer-панелей (search, notifications)
   const [activePanel, setActivePanel] = useState(null);
   const openPanel = (key) => setActivePanel(key);
   const closePanel = () => setActivePanel(null);
 
-  // Для централізованого модального вікна постів
-  const [postModal, setPostModal] = useState(null);
-  const openPostModal = (type, payload = null) => {
+  const [modal, setModal] = useState(null);
+  const openModal = (type, component, payload = null) => {
     if (type === "create") {
-      setPostModal({
+      setModal({
         type,
-        component: CreatePost,
+        component,
         payload,
       });
     }
   };
-  const closePostModal = () => setPostModal(null);
+  const closeModal = () => setModal(null);
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -47,21 +43,22 @@ const Layout = () => {
           openPanel={openPanel}
           closePanel={closePanel}
           activePanel={activePanel}
-          openPostModal={openPostModal}
+          openModal={openModal}
+          closeModal={closeModal}
         />
 
         <main className={style.main}>
-          <Outlet />
+          <Outlet context={{openModal}}/>
         </main>
 
-        <SearchDrawer open={activePanel === "search"} onClose={closePanel} />
+        <SearchDrawer open={activePanel === "search"} onClose={closePanel}/>
         <NotificationsDrawer
           open={activePanel === "notifications"}
           onClose={closePanel}
         />
       </div>
 
-      <PostModal modal={postModal} onClose={closePostModal} />
+      <PostModal modal={modal} onClose={closeModal}/>
 
       <button onClick={handleLogout} className={style.logout_btn}>
         Logout

@@ -8,9 +8,11 @@ import MessagesIcon from "./Messages.jsx";
 import MessagesIconActive from "./MessagesActive.jsx";
 import NotificationsIcon from "./Notifications.jsx";
 import NotificationsIconActive from "./NotificationsActive.jsx";
+import CommentsIcon from "./Comment.jsx";
 import CreatePostIcon from "./CreatePost.jsx";
 import ProfileIcon from "./Profile.jsx";
 import UserAvatar from "./UserAvatar.jsx";
+import LikeIcon from "./Like.jsx";
 
 export {
   HomeIcon,
@@ -24,5 +26,7 @@ export {
   NotificationsIcon,
   NotificationsIconActive,
   CreatePostIcon,
-  UserAvatar
+  UserAvatar,
+  CommentsIcon,
+  LikeIcon
 }

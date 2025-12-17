@@ -76,7 +76,7 @@ export const refreshUser = createAsyncThunk(
       if (!auth.refreshToken) {
         return rejectWithValue("No refresh token in state");
       }
-      console.log("refreshToken from state:", auth.refreshToken)
+      
       const { data } = await instance.post("/auth/refresh", {
         refreshToken: auth.refreshToken, 
       });

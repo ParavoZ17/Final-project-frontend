@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import {useOutletContext} from "react-router-dom";
 import style from "./PostCard.module.css";
-import {NotificationsIcon} from "../../../assets/svg/index.js"
+import {CommentsIcon, LikeIcon} from "../../../assets/svg/index.js"
+import ViewPost from "./ViewPost/ViewPost.jsx";
 
 const PostCard = ({ post }) => {
+  const {openModal} = useOutletContext();
+
   return (
-    <Link to={`/post/${post.id}`} className={style.card}>
+    <div className={style.card} onClick={() => openModal("create", ViewPost, {post})}>
       <img
         src={post.images}
         alt=""
@@ -14,14 +17,14 @@ const PostCard = ({ post }) => {
       <div className={style.overlay}>
         <div className={style.stats}>
           <div className={style.stat}>
-            <NotificationsIcon/> <span>{post.likesCount}</span>
+            <LikeIcon color={'white'} active={true}/> <span>{post.likesCount}</span>
           </div>
           <div className={style.stat}>
-            💬 <span>{post.commentsCount}</span>
+            <span><CommentsIcon fill={'white'}/></span><span>{post.commentsCount}</span>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 

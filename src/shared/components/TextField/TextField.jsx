@@ -12,6 +12,10 @@ const TextField = ({
 }) => {
   const id = useId();
 
+  const inputProps = register && name
+    ? register(name, rules)
+    : {};
+
   return (
     <div className={styles.wrapper}>
       {label && (
@@ -21,10 +25,10 @@ const TextField = ({
       )}
 
       <input
-        {...register(name, rules)}
-        type={type}
         id={id}
+        type={type}
         className={styles.field}
+        {...inputProps}
         {...props}
       />
 
