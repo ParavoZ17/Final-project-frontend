@@ -14,3 +14,10 @@ export const updateMe = async (formData) => {
   const {data} = await instance.patch("/user/me", formData);
   return data;
 }
+
+export const searchUsers = async (query) => {
+  const { data } = await instance.get(
+    `/users/search?query=${query}`
+  );
+  return data;
+};
