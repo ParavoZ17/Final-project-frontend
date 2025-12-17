@@ -27,7 +27,7 @@ const Modal = ({open, onClose, title, children}) => {
         onMouseDown={(e) => e.stopPropagation()}
         aria-hidden={!open}
       >
-        <Header title={title} onClose={onClose}/>
+        {/* <Header title={title} onClose={onClose}/> */}
         <div className={style.body}>{children}</div>
       </div>
     </div>

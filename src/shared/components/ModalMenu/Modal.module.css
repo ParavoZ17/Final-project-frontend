@@ -37,6 +37,7 @@
 
     pointer-events: none;
     will-change: transform;
+    
 }
 .panel.open{
     transform: translateX(0);

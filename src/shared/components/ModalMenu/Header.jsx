@@ -1,10 +1,9 @@
 import style from "./Header.module.css";
 
-const  Header = ({ title, onClose }) => {
+const  Header = ({ title}) => {
   return (
     <div className={style.header}>
       <span className={style.title}>{title}</span>
-      <button className={style.close} onClick={onClose}>✕</button>
     </div>
   );
 }

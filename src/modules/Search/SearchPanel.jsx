@@ -1,13 +1,21 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import TextField from "../../shared/components/TextField/TextField";
 import styles from "./SearchPanel.module.css";
 
 const SearchPanel = ({ recent = [] }) => {
   const [value, setValue] = useState("");
+   const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm();
+
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Search</h2>
+   
 
       <div className={styles.inputWrapper}>
         <TextField

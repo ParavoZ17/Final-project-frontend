@@ -1,7 +1,9 @@
 import {useMemo, useState} from "react";
+import {useSelector} from "react-redux";
 import styles from "./ViewPost.module.css";
 import {LikeIcon} from "../../../../assets/svg"
 import PostOptionsMenu from "./PostOptionsMenu";
+import {selectUser} from "../../../../store/auth/authSelector";
 
 function timeAgo(iso) {
   const d = new Date(iso).getTime();
@@ -16,6 +18,7 @@ function timeAgo(iso) {
 }
 
 const ViewPost = ({post}) => {
+  const authUser = useSelector(selectUser);
   const [menuOpen, setMenuOpen] = useState(false);
   const [text, setText] = useState("");
   const created = useMemo(() => timeAgo(post.createdAt), [post.createdAt]);
@@ -23,8 +26,6 @@ const ViewPost = ({post}) => {
   const onToggleLike = () => {
   }
 
-  // const onAddComment = () => {
-  // };
   return (
     <div className={styles.wrapper}>
       <div className={styles.layout}>
@@ -49,18 +50,20 @@ const ViewPost = ({post}) => {
               <div className={styles.name}>{post?.author?.name}</div>
               <div className={styles.meta}>
                 {post?.author?.username
-                  ? `@${post?.author?.username}`
+                  ? post?.author?.username
                   : created}
               </div>
             </div>
-
-            <button
-              className={styles.more}
-              onClick={() => setMenuOpen(true)}
-              aria-label="Post options"
-            >
-              ⋯
-            </button>
+            {
+              authUser?.username === post?.author?.username &&
+              <button
+                className={styles.more}
+                onClick={() => setMenuOpen(true)}
+                aria-label="Post options"
+              >
+                ⋯
+              </button>
+            }
           </div>
 
           {post?.caption && (
