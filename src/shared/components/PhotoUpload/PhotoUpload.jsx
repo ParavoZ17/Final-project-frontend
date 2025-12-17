@@ -71,7 +71,7 @@ export default function PhotoUpload({ files, setFiles, content, setContent, wasS
         />
 
         {wasSubmitted && !content.trim() && (
-          <div className={style.error}>Напишіть текст для публікації</div>
+          <div className={style.error}>Caption needed...</div>
         )}
 
         <div className={style.counter}>{content.length} / 2200</div>

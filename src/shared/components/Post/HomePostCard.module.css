@@ -1,0 +1,88 @@
+.card {
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e5e7eb;
+}
+
+.username {
+    font-weight: 600;
+}
+
+.time {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.follow {
+    border: none;
+    background: none;
+    color: #2563eb;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.imageWrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #f3f4f6;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.imageWrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.left span {
+    font-size: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.content {
+    font-size: 14px;
+}
+
+.likes {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.caption {
+    margin-bottom: 4px;
+}
+
+.more {
+    color: #6b7280;
+    font-size: 13px;
+    cursor: pointer;
+}
