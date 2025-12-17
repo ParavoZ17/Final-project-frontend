@@ -1,9 +1,9 @@
-import {useOutletContext} from "react-router-dom";
+import {useOutletContext, Link} from "react-router-dom";
 import ProfileIcon from "../../../assets/svg/Profile";
 import style from "./HomePostCard.module.css";
 import {LikeIcon, CommentsIcon} from "../../../assets/svg"
 import ViewPost  from "./ViewPost/ViewPost";
-
+import {timeAgo} from "../../utils/timeAgo";
 
 const HomePostCard = ({post}) => {
   const {openModal} = useOutletContext();
@@ -13,13 +13,17 @@ const HomePostCard = ({post}) => {
 
       <div className={style.header}>
         <div className={style.user}>
-          <ProfileIcon avatarUrl={post.author.avatar} size={26}/>
-          <span className={style.username}>
+          <Link
+            className={style.authorBox}
+            to={`/profile/${post?.author?.username}`}>
+            <ProfileIcon avatarUrl={post?.author?.avatar} size={26}/>
+            <span className={style.username}>
             {post.author?.username || "user"}
           </span>
+          </Link>
           <span className={style.dot}>•</span>
           <span className={style.time}>
-            {new Date(post.createdAt).toLocaleDateString()}
+            {timeAgo(post.createdAt)}
           </span>
         </div>
       </div>
@@ -33,7 +37,7 @@ const HomePostCard = ({post}) => {
       {/* actions */}
       <div className={style.actions}>
         <div className={style.left}>
-          <span><LikeIcon active={post.isLiked}/></span>
+          <span><LikeIcon active={post.userLiked}/></span>
           <span onClick={() => openModal("create", ViewPost, {post})}>
             <CommentsIcon stroke='black'/>
           </span>

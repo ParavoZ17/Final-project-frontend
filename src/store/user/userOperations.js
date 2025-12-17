@@ -42,3 +42,45 @@ export const updateAuthUserProfile = createAsyncThunk(
     }
   }
 );
+
+export const getIsFollowingUser = createAsyncThunk(
+  "user/isFollowing",
+  async (userId, {rejectWithValue}) => {
+    try {
+      return await userApi.getIsFollowing(userId);
+
+    } catch (error) {
+      return rejectWithValue({
+        email: error?.response?.data.message || error?.message
+      });
+    }
+  }
+);
+
+export const followUser = createAsyncThunk(
+  "user/follow",
+  async (userId, {rejectWithValue}) => {
+    try {
+      return await userApi.follow(userId);
+
+    } catch (error) {
+      return rejectWithValue({
+        email: error?.response?.data.message || error?.message
+      });
+    }
+  }
+);
+
+export const unFollowUser = createAsyncThunk(
+  "user/unFollow",
+  async (userId, {rejectWithValue}) => {
+    try {
+      return await userApi.unFollow(userId);
+
+    } catch (error) {
+      return rejectWithValue({
+        email: error?.response?.data.message || error?.message
+      });
+    }
+  }
+);

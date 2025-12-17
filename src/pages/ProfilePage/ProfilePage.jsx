@@ -7,6 +7,7 @@ import {getUserByUsername} from "../../store/user/userOperations";
 import {selectUser} from "../../store/auth/authSelector";
 import LoadingOverlay from "../../shared/components/Loading/LoadingOverlay";
 import PostCard from "../../shared/components/Post/PostCard.jsx";
+import FollowButton from "../../shared/components/Button/FollowButton";
 
 const ProfilePage = () => {
   const basicProfile = {
@@ -36,7 +37,6 @@ const ProfilePage = () => {
       setIsMe(user?.id === authUser?.id);
       setProfile(user);
       setIsLoading(false);
-    console.log(user)
     };
 
     fetchUser();
@@ -66,7 +66,7 @@ const ProfilePage = () => {
                       onClick={() => navigate(`/profile/edit`)}
                     >Edit profile</button> :
                     <>
-                      <button className={style.followBtn} type="button">Follow</button>
+                      <FollowButton author={profile || {}}/>
                       <button className={style.messageBtn} type="button">Message</button>
                     </>
                   }
@@ -74,7 +74,7 @@ const ProfilePage = () => {
 
                 <div className={style.stats}>
                   <div className={style.stat}>
-                    <b>{profile.postsCount ?? 0}</b> <span>posts</span>
+                    <b>{profile?.posts?.length ?? 0}</b> <span>posts</span>
                   </div>
                   <div className={style.stat}>
                     <b>{profile.followersCount ?? 0}</b> <span>followers</span>
@@ -95,7 +95,7 @@ const ProfilePage = () => {
             </header>
             <section className={style.grid}>
               {profile?.posts?.map((p) => (
-                <PostCard key={p._id} post={p}/>
+                <PostCard key={p.id} post={p}/>
               ))}
             </section>
           </>

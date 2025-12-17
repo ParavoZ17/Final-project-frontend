@@ -6,6 +6,7 @@
     import authReducer from "./auth/authSlice";
   import profileReducer from "./profile/profileSlice.js"
   import userReducer from "./user/userSlice";
+  import notificationReducer from "./notifications/notificationSlice";
 
     const persistConfig = {
       key: "auth",
@@ -20,6 +21,7 @@
       posts: postsReducer,
       profile: profileReducer,
       user: userReducer,
+      notifications: notificationReducer,
     }); 
 
     export default rootReducer;

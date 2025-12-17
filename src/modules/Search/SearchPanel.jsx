@@ -1,5 +1,4 @@
 import LoadingOverlay from "../../shared/components/Loading/LoadingOverlay";
-
 import { useState, useEffect } from "react";
 import TextField from "../../shared/components/TextField/TextField";
 import { searchUsers } from "../../shared/api/user-api";
@@ -52,22 +51,24 @@ const SearchPanel = ({ recent = [] }) => {
         )}
       </div>
 
-      {isLoading && <LoadingOverlay/>}
+      {isLoading && <LoadingOverlay />}
 
-      {value ? (
+      {value && (
         <ul className={styles.list}>
           {!isLoading && results.length === 0 && (
             <li className={styles.empty}>No users found</li>
           )}
-
           {results.map((user) => (
-            <li key={user._id} className={styles.item}>
+            <li key={user.id} className={styles.item}>
               <img src={user.avatar} alt={user.username} />
               <span>{user.username}</span>
             </li>
           ))}
         </ul>
-      ) : (
+      )}
+
+      
+      {recent.length > 0 && (
         <>
           <p className={styles.subtitle}>Recent</p>
           <ul className={styles.list}>

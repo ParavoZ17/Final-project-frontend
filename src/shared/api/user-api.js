@@ -17,7 +17,23 @@ export const updateMe = async (formData) => {
 
 export const searchUsers = async (query) => {
   const { data } = await instance.get(
-    `/users/search?query=${query}`
+    `/user/search?query=${query}`
   );
   return data;
 };
+
+export const getIsFollowing = async (userId) => {
+  const {data} = await instance.get(`/user/${userId}/is-following`);
+  return data;
+}
+
+export const follow = async (userId) => {
+  const {data} = await instance.post(`/user/${userId}/follow`);
+  return data;
+}
+
+
+export const unFollow = async (userId) => {
+  const {data} = await instance.delete(`/user/${userId}/follow`);
+  return data;
+}

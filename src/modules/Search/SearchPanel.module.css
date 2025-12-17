@@ -10,6 +10,7 @@
 
 .inputWrapper {
   position: relative;
+  margin-bottom: 45px;
 }
 
 .clear {
@@ -26,9 +27,9 @@
 }
 
 .subtitle {
-  margin-top: 16px;
-  font-size: 14px;
-  font-weight: 500;
+  margin-bottom: 25px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .list {

@@ -32,7 +32,7 @@ const PostModal = ({ modal, onClose }) => {
         onMouseDown={(e) => e.stopPropagation()}
       >
         {modal.type === "create" && (
-          <modal.component {...modal.payload} />
+          <modal.component {...modal.payload} closeModal={onClose} />
         )}
       </div>
     </div>,
