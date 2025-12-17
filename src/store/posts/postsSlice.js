@@ -1,45 +1,30 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import instance from "../../shared/api/instance";
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  fetchAllPosts,
+  createPost,
+  fetchPostById,
+  updatePost,
+  deletePost,
+} from "./postsOperations";
 
 const initialState = {
   posts: [],
+  selectedPost: null, // для модалки
   loading: false,
   error: null,
 };
 
-// Створення поста
-export const createPost = createAsyncThunk(
-  "posts/create",
-  async (formData, { rejectWithValue }) => {
-    try {
-      // Використовуємо axios instance, токен підставляється автоматично через інтерсептор
-      const { data } = await instance.post("/posts", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      return data;
-    } catch (err) {
-      return rejectWithValue(err.response?.data?.message || err.message);
-    }
-  }
-);
-
-// Отримати всі пости
-export const fetchPosts = createAsyncThunk(
-  "posts/fetchAll",
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data } = await instance.get("/posts");
-      return data;
-    } catch (err) {
-      return rejectWithValue(err.response?.data?.message || err.message);
-    }
-  }
-);
-
 const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
+  reducers: {
+    openPostModal: (state, action) => {
+      state.selectedPost = action.payload;
+    },
+    closePostModal: (state) => {
+      state.selectedPost = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // CREATE POST
@@ -49,27 +34,56 @@ const postsSlice = createSlice({
       })
       .addCase(createPost.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.posts.unshift(payload); // додаємо новий пост на початок
+        state.posts.unshift(payload);
       })
       .addCase(createPost.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       })
 
-      // FETCH POSTS
-      .addCase(fetchPosts.pending, (state) => {
+      // FETCH ALL POSTS
+      .addCase(fetchAllPosts.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchPosts.fulfilled, (state, { payload }) => {
+      .addCase(fetchAllPosts.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.posts = payload;
       })
-      .addCase(fetchPosts.rejected, (state, { payload }) => {
+      .addCase(fetchAllPosts.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
+      })
+
+      // FETCH POST BY ID
+      .addCase(fetchPostById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchPostById.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.selectedPost = payload;
+      })
+      .addCase(fetchPostById.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+
+      // UPDATE POST
+      .addCase(updatePost.fulfilled, (state, { payload }) => {
+        const index = state.posts.findIndex((p) => p._id === payload._id);
+        if (index !== -1) state.posts[index] = payload;
+        if (state.selectedPost?._id === payload._id) state.selectedPost = payload;
+      })
+
+      // DELETE POST
+      .addCase(deletePost.fulfilled, (state, { payload }) => {
+        state.posts = state.posts.filter((p) => p._id !== payload._id);
+        if (state.selectedPost?._id === payload._id) state.selectedPost = null;
       });
   },
 });
+
+export const { openPostModal, closePostModal } = postsSlice.actions;
 
 export default postsSlice.reducer;

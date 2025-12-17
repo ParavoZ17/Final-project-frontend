@@ -1,7 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import style from "./PhotoUpload.module.css";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../store/auth/authSelector";
+import ProfileIcon from "../../../assets/svg/Profile";
 
-export default function PhotoUpload({ files, setFiles, content, setContent }) {
+export default function PhotoUpload({ files, setFiles, content, setContent, wasSubmitted }) {
+  const user = useSelector(selectUser);
   const inputRef = useRef();
 
   const handleFileChange = (e) => {
@@ -47,21 +51,28 @@ export default function PhotoUpload({ files, setFiles, content, setContent }) {
             />
           )}
         </label>
+        {wasSubmitted && !files.length && (
+          <div className={style.error}>Додайте хоча б одну фотографію</div>
+        )}
       </div>
 
       <div className={style.sidebar}>
         <div className={style.user}>
-          <div className={style.avatar}>ICH</div>
-          <span className={style.username}>skai_laba</span>
+          <ProfileIcon avatarUrl={user.avatar} size={28}/>
+          <span className={style.username}>{user.username}</span>
         </div>
 
         <textarea
-          placeholder="Напишіть текст..."
+          placeholder="Write a caption…"
           maxLength={2200}
           className={style.textarea}
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
+
+        {wasSubmitted && !content.trim() && (
+          <div className={style.error}>Напишіть текст для публікації</div>
+        )}
 
         <div className={style.counter}>{content.length} / 2200</div>
       </div>

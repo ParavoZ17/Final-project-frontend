@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 import style from "./PostModal.module.css";
 
 const PostModal = ({ modal, onClose }) => {
@@ -7,7 +8,10 @@ const PostModal = ({ modal, onClose }) => {
   useEffect(() => {
     if (!isOpen) return;
 
-    const onKeyDown = (e) => e.key === "Escape" && onClose();
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+
     document.addEventListener("keydown", onKeyDown);
 
     const prevOverflow = document.body.style.overflow;
@@ -21,15 +25,18 @@ const PostModal = ({ modal, onClose }) => {
 
   if (!modal) return null;
 
-  return (
+  return createPortal(
     <div className={style.overlay} onMouseDown={onClose}>
       <div
         className={style.modal}
         onMouseDown={(e) => e.stopPropagation()}
       >
-        {modal.type === "create" && <modal.component {...modal.payload} />}
+        {modal.type === "create" && (
+          <modal.component {...modal.payload} />
+        )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

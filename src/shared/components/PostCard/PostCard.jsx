@@ -1,25 +1,32 @@
+import ProfileIcon from "../../../assets/svg/Profile";
 import style from "./PostCard.module.css";
 
-const PostCard = ({ post }) => {
-  return (
-    <article className={style.card}>
 
+const PostCard = ({ post, onClick }) => {
+  
+  return (
+    <article className={style.card} onClick={onClick}>
+      
       <div className={style.header}>
         <div className={style.user}>
-          <div className={style.avatar} />
-          <span className={style.username}>{post.username}</span>
+          <ProfileIcon avatarUrl = {post.author.avatar} size = {26}/>
+          <span className={style.username}>
+            {post.author?.username || "user"}
+          </span>
           <span className={style.dot}>•</span>
-          <span className={style.time}>{post.time}</span>
+          <span className={style.time}>
+            {new Date(post.createdAt).toLocaleDateString()}
+          </span>
         </div>
-        <button className={style.follow}>follow</button>
       </div>
 
+      {post.images?.length > 0 && (
+        <div className={style.imageWrap}>
+          <img src={post.images[0]} alt="" />
+        </div>
+      )}
 
-      <div className={style.imageWrap}>
-        <img src={post.image} alt="" />
-      </div>
-
-
+      {/* actions */}
       <div className={style.actions}>
         <div className={style.left}>
           <span>♡</span>
@@ -27,15 +34,23 @@ const PostCard = ({ post }) => {
         </div>
       </div>
 
+      {/* content */}
       <div className={style.content}>
-        <div className={style.likes}>{post.likes} likes</div>
-        <div className={style.caption}>
-          <b>{post.username}</b> {post.caption}
+        <div className={style.likes}>
+          {post.likesCount} likes
         </div>
-        <div className={style.more}>View all comments ({post.comments})</div>
+
+        <div className={style.caption}>
+          <b>{post.author?.username || "user"}</b>{" "}
+          {post.content}
+        </div>
+
+        <div className={style.more}>
+          View all comments ({post.commentsCount})
+        </div>
       </div>
     </article>
   );
-}
+};
 
 export default PostCard;

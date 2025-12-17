@@ -2,18 +2,19 @@ import instance from "./instance";
 
 // створення посту (контент + фото)
 export const createPost = async (payload) => {
-  // payload = FormData
+  
   const { data } = await instance.post("/posts", payload, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
   });
   return data;
 };
 
 
-export const getPosts = async () => {
-  const { data } = await instance.get("/posts");
+export const getPosts = async (token) => {
+  const { data } = await instance.get("/posts", {
+  headers: {
+    "Authorization" : `Bearer ${token}`,
+  }
+});
   return data;
 };
 
@@ -26,9 +27,6 @@ export const getPostById = async (id) => {
 // оновлення посту
 export const updatePost = async (id, payload) => {
   const { data } = await instance.patch(`/posts/${id}`, payload, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
   });
   return data;
 };
