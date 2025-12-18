@@ -1,9 +1,10 @@
 import {useOutletContext, Link} from "react-router-dom";
 import ProfileIcon from "../../../assets/svg/Profile";
 import style from "./HomePostCard.module.css";
-import {LikeIcon, CommentsIcon} from "../../../assets/svg"
+import {CommentsIcon} from "../../../assets/svg"
 import ViewPost  from "./ViewPost/ViewPost";
 import {timeAgo} from "../../utils/timeAgo";
+import LikeButton from "../Button/LikeButton.jsx";
 
 const HomePostCard = ({post}) => {
   const {openModal} = useOutletContext();
@@ -34,17 +35,15 @@ const HomePostCard = ({post}) => {
         </div>
       )}
 
-      {/* actions */}
       <div className={style.actions}>
         <div className={style.left}>
-          <span><LikeIcon active={post.userLiked}/></span>
-          <span onClick={() => openModal("create", ViewPost, {post})}>
+          <span><LikeButton post={post}/></span>
+          <span onClick={() => openModal("create", ViewPost, {postId: post.id})}>
             <CommentsIcon stroke='black'/>
           </span>
         </div>
       </div>
 
-      {/* content */}
       <div className={style.content}>
         <div className={style.likes}>
           {post.likesCount} likes

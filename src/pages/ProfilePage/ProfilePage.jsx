@@ -4,7 +4,9 @@ import {useDispatch, useSelector} from "react-redux";
 import style from "./Profile.module.css";
 import ProfileNotAvailable from "./ProfileNotAvailable.jsx";
 import {getUserByUsername} from "../../store/user/userOperations";
+import {setPosts} from "../../store/posts/postsSlice";
 import {selectUser} from "../../store/auth/authSelector";
+import {selectPosts} from "../../store/posts/postsSelectors";
 import LoadingOverlay from "../../shared/components/Loading/LoadingOverlay";
 import PostCard from "../../shared/components/Post/PostCard.jsx";
 import FollowButton from "../../shared/components/Button/FollowButton";
@@ -29,11 +31,13 @@ const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const {username} = useParams();
   const authUser = useSelector(selectUser);
+  const posts = useSelector(selectPosts);
 
   useEffect(() => {
     const fetchUser = async () => {
       setIsLoading(true);
       const {payload: user} = await dispatch(getUserByUsername(username));
+      await dispatch(setPosts(user?.posts ?? []));
       setIsMe(user?.id === authUser?.id);
       setProfile(user);
       setIsLoading(false);
@@ -94,7 +98,7 @@ const ProfilePage = () => {
               </div>
             </header>
             <section className={style.grid}>
-              {profile?.posts?.map((p) => (
+              {posts?.map((p) => (
                 <PostCard key={p.id} post={p}/>
               ))}
             </section>

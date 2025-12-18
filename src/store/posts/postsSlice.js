@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {
   fetchAllPosts,
   createPost,
@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   posts: [],
-  selectedPost: null, // для модалки
+  selectedPost: null, 
   loading: false,
   error: null,
 };
@@ -24,6 +24,16 @@ const postsSlice = createSlice({
     closePostModal: (state) => {
       state.selectedPost = null;
     },
+    updatePostLike: (state, {payload}) => {
+      const post = state.posts.find(p => p.id === payload?.post?.id);
+      if (post) {
+        post.likesCount = payload?.likesResponse?.likesCount;
+        post.userLiked = payload?.likesResponse?.liked;
+      }
+    },
+    setPosts: (state, action) => {
+      state.posts = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -32,11 +42,11 @@ const postsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(createPost.fulfilled, (state, { payload }) => {
+      .addCase(createPost.fulfilled, (state, {payload}) => {
         state.loading = false;
         state.posts.unshift(payload);
       })
-      .addCase(createPost.rejected, (state, { payload }) => {
+      .addCase(createPost.rejected, (state, {payload}) => {
         state.loading = false;
         state.error = payload;
       })
@@ -46,11 +56,11 @@ const postsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchAllPosts.fulfilled, (state, { payload }) => {
+      .addCase(fetchAllPosts.fulfilled, (state, {payload}) => {
         state.loading = false;
         state.posts = payload;
       })
-      .addCase(fetchAllPosts.rejected, (state, { payload }) => {
+      .addCase(fetchAllPosts.rejected, (state, {payload}) => {
         state.loading = false;
         state.error = payload;
       })
@@ -60,30 +70,34 @@ const postsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchPostById.fulfilled, (state, { payload }) => {
+      .addCase(fetchPostById.fulfilled, (state, {payload}) => {
         state.loading = false;
         state.selectedPost = payload;
       })
-      .addCase(fetchPostById.rejected, (state, { payload }) => {
+      .addCase(fetchPostById.rejected, (state, {payload}) => {
         state.loading = false;
         state.error = payload;
       })
 
       // UPDATE POST
-      .addCase(updatePost.fulfilled, (state, { payload }) => {
+      .addCase(updatePost.fulfilled, (state, {payload}) => {
         const index = state.posts.findIndex((p) => p._id === payload._id);
         if (index !== -1) state.posts[index] = payload;
         if (state.selectedPost?._id === payload._id) state.selectedPost = payload;
       })
 
       // DELETE POST
-      .addCase(deletePost.fulfilled, (state, { payload }) => {
+      .addCase(deletePost.fulfilled, (state, {payload}) => {
         state.posts = state.posts.filter((p) => p._id !== payload._id);
         if (state.selectedPost?._id === payload._id) state.selectedPost = null;
       });
   },
 });
 
-export const { openPostModal, closePostModal } = postsSlice.actions;
-
+export const {
+  openPostModal,
+  closePostModal,
+  updatePostLike,
+  setPosts,
+} = postsSlice.actions;
 export default postsSlice.reducer;

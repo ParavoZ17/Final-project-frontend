@@ -2,18 +2,19 @@ import {useState} from "react";
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import style from "./ViewPost.module.css";
-import {LikeIcon} from "../../../../assets/svg"
 import PostOptionsMenu from "./PostOptionsMenu";
 import {selectUser} from "../../../../store/auth/authSelector";
 import FollowButton from "../../Button/FollowButton.jsx";
 import {timeAgo} from "../../../utils/timeAgo";
+import LikeButton from "../../Button/LikeButton.jsx";
 
-const ViewPost = ({post, closeModal}) => {
+const ViewPost = ({postId, closeModal}) => {
+  const posts = useSelector((state) => state.posts.posts);
+  const post = posts.find((p) => p.id === postId);
   const authUser = useSelector(selectUser);
   const [menuOpen, setMenuOpen] = useState(false);
   const [text, setText] = useState("");
-  const onToggleLike = () => {
-  }
+
 
   return (
     <div className={style.wrapper}>
@@ -86,9 +87,7 @@ const ViewPost = ({post, closeModal}) => {
           </div>
 
           <div className={style.actions}>
-            <LikeIcon
-              onClick={() => onToggleLike()}
-              active={post.isLiked}/>
+            <LikeButton post={post}/>
             <div className={style.like}>{post.likesCount} likes</div>
             <div className={style.time}>{timeAgo(post.createdAt)}</div>
             <form

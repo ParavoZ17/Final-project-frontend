@@ -24,15 +24,20 @@ export const getPostById = async (id) => {
   return data;
 };
 
-// оновлення посту
+
 export const updatePost = async (id, payload) => {
   const { data } = await instance.patch(`/posts/${id}`, payload, {
   });
   return data;
 };
 
-// видалення посту
+
 export const deletePost = async (id) => {
   const { data } = await instance.delete(`/posts/${id}`);
+  return data;
+};
+
+export const like = async (id) => {
+  const { data } = await instance.post(`/posts/${id}/like`);
   return data;
 };
