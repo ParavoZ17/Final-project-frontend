@@ -16,7 +16,8 @@
 .item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
+  
 }
 
 .avatar {
@@ -57,4 +58,11 @@ font-size: 14px;
 
 .unread {
   background-color: rgba(0, 0, 0, 0.03);
+}
+
+.link{
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
 }

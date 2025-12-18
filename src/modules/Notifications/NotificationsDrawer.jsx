@@ -4,7 +4,7 @@ import NotificationsPanel from "./NotificationsPanel";
 const NotificationsDrawer = ({open, onClose}) => {
   return (
     <DrawerShell open={open} onClose={onClose} title="Notifications">
-      <NotificationsPanel/>
+      <NotificationsPanel onClose={onClose}/>
     </DrawerShell>
   );
 }

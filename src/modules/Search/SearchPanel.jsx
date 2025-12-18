@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import TextField from "../../shared/components/TextField/TextField";
 import { searchUsers } from "../../shared/api/user-api";
 import styles from "./SearchPanel.module.css";
+import { Link } from "react-router-dom";
 
-const SearchPanel = ({ recent = [] }) => {
+const SearchPanel = ({ recent = [], open, onClose }) => {
   const [value, setValue] = useState("");
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +30,14 @@ const SearchPanel = ({ recent = [] }) => {
 
     return () => clearTimeout(timeoutId);
   }, [value]);
+
+  useEffect(() => {
+    if (!open) {
+      setValue("");
+      setResults([]);
+      setIsLoading(false);
+    }
+  }, [open]);
 
   return (
     <div className={styles.container}>
@@ -58,16 +67,22 @@ const SearchPanel = ({ recent = [] }) => {
           {!isLoading && results.length === 0 && (
             <li className={styles.empty}>No users found</li>
           )}
+
           {results.map((user) => (
             <li key={user.id} className={styles.item}>
-              <img src={user.avatar} alt={user.username} />
-              <span>{user.username}</span>
+              <Link
+                to={`/profile/${user.username}`}
+                onClick={onClose}
+                className={styles.link}
+              >
+                <img src={user.avatar} alt={user.username} />
+                <span>{user.username}</span>
+              </Link>
             </li>
           ))}
         </ul>
       )}
 
-      
       {recent.length > 0 && (
         <>
           <p className={styles.subtitle}>Recent</p>

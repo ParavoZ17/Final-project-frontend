@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styles from "./NotificationsPanel.module.css";
 
 import {
@@ -25,7 +26,7 @@ const getTextByType = (type) => {
   }
 };
 
-const NotificationsPanel = () => {
+const NotificationsPanel = ({ onClose}) => {
   const dispatch = useDispatch();
   const notifications = useSelector(selectNotifications);
   const isLoading = useSelector(selectNotificationsLoading);
@@ -41,7 +42,7 @@ const NotificationsPanel = () => {
   if (!notifications.length) {
     return <p className={styles.title}>No notifications</p>;
   }
-
+console.log(notifications)
   return (
     <div className={styles.container}>
       <p className={styles.title}>New</p>
@@ -57,6 +58,11 @@ const NotificationsPanel = () => {
               }
             }}
           >
+            <Link
+                            to={`/profile/${item.sender.username}`}
+                            onClick={onClose}
+                            className={styles.link}
+                          >
             <img
               src={item.sender.avatar}
               alt={item.sender.username}
@@ -72,10 +78,10 @@ const NotificationsPanel = () => {
                 <span className={styles.time}> {item.timeAgo}</span>
               </p>
             </div>
-
+          </Link>   
             {item.post && (
               <img
-                src={item.post.preview}
+                src={item.post.images[0]}
                 alt="post preview"
                 className={styles.preview}
               />
