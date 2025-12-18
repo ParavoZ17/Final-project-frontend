@@ -42,8 +42,7 @@ const NotificationsPanel = ({ onClose}) => {
   if (!notifications.length) {
     return <p className={styles.title}>No notifications</p>;
   }
-console.log(notifications)
-  return (
+  return (  
     <div className={styles.container}>
       <p className={styles.title}>New</p>
 
@@ -83,7 +82,7 @@ console.log(notifications)
               <img
                 src={item.post.images[0]}
                 alt="post preview"
-                className={styles.preview}
+                className={`${styles.preview} ${!item.read ? styles.unread : ""}`}
               />
             )}
           </li>

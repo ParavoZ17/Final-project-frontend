@@ -7,7 +7,7 @@ const PostCard = ({ post }) => {
   const {openModal} = useOutletContext();
 
   return (
-    <div className={style.card} onClick={() => openModal("create", ViewPost, {post})}>
+    <div className={style.card} onClick={() => openModal("create", ViewPost, {postId: post.id})}>
       <img
         src={post.images}
         alt=""

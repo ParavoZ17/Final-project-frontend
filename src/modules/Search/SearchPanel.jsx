@@ -76,7 +76,7 @@ const SearchPanel = ({ recent = [], open, onClose }) => {
                 className={styles.link}
               >
                 <img src={user.avatar} alt={user.username} />
-                <span>{user.username}</span>
+                <p>{user.username}</p>
               </Link>
             </li>
           ))}

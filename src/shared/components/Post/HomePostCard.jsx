@@ -54,7 +54,7 @@ const HomePostCard = ({post}) => {
           {post.content}
         </div>
 
-        <div className={style.more} onClick={() => openModal("create", ViewPost, {post})}>
+        <div className={style.more} onClick={() => openModal("create", ViewPost, {postId: post.id})}>
           View all comments ({post.commentsCount})
         </div>
       </div>
