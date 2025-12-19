@@ -1,15 +1,14 @@
-import {useState} from "react";
-import {Outlet} from "react-router-dom";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import Sidebar from "../modules/Sidebar/Sidebar";
 import Footer from "../modules/Footer/Footer";
 import SearchDrawer from "../modules/Search/SearchDriwer.jsx";
 import NotificationsDrawer from "../modules/Notifications/NotificationsDrawer.jsx";
 
-import {useDispatch} from "react-redux";
-import {logoutUser} from "../store/auth/authOperations";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../store/auth/authOperations";
 
 import style from "./Layout.module.css";
-
 import PostModal from "../shared/components/PostModal/PostModal";
 
 const Layout = () => {
@@ -38,7 +37,6 @@ const Layout = () => {
   return (
     <div className={style.container}>
       <div className={style.content}>
-
         <Sidebar
           openPanel={openPanel}
           closePanel={closePanel}
@@ -48,17 +46,19 @@ const Layout = () => {
         />
 
         <main className={style.main}>
-          <Outlet context={{openModal}}/>
+          <Outlet context={{ openModal }} />
         </main>
 
-        <SearchDrawer open={activePanel === "search"} onClose={closePanel}/>
+        <SearchDrawer open={activePanel === "search"} onClose={closePanel} />
         <NotificationsDrawer
           open={activePanel === "notifications"}
           onClose={closePanel}
         />
       </div>
 
-      <PostModal modal={modal} onClose={closeModal}/>
+      <Footer />
+
+      <PostModal modal={modal} onClose={closeModal} />
 
       <button onClick={handleLogout} className={style.logout_btn}>
         Logout

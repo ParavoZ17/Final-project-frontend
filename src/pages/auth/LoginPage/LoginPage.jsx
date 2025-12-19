@@ -4,12 +4,12 @@ import backgroundFoto from "../../../assets/images/LogoBackground.png";
 import Logo from "../../../shared/components/Logo/Logo";
 import LoginForm from "../../../modules/LoginForm/LoginForm";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { loginUser } from "../../../store/auth/authOperations";
-import { selectAuthRequest } from "../../../store/auth/authSelector";
+
 
 const LoginPage = () => {
-  const { error, loading } = useSelector(selectAuthRequest);
+ 
   const dispatch = useDispatch();
   const handleLogin = (data) => {
     dispatch(loginUser(data));

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./NotificationsPanel.module.css";
 
+import ProfileIcon from "../../assets/svg/Profile";
+
 import {
   getNotifications,
   readNotification,
@@ -62,11 +64,7 @@ const NotificationsPanel = ({ onClose}) => {
                             onClick={onClose}
                             className={styles.link}
                           >
-            <img
-              src={item.sender.avatar}
-              alt={item.sender.username}
-              className={styles.avatar}
-            />
+            <ProfileIcon avatarUrl={item.sender.avatar} size={36} />
 
             <div className={styles.content}>
               <p className={styles.text}>

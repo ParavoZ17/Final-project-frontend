@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import {
   registerUser,
@@ -25,8 +25,11 @@ const authSlice = createSlice({
   reducers: {
     updateAuthUser(state, action) {
       if (state.user) {
-        state.user = {...state.user, ...action.payload};
+        state.user = { ...state.user, ...action.payload };
       }
+    },
+    resetRegisterSuccess(state) {
+      state.isRegisterSuccess = false;
     },
   },
   extraReducers: (builder) => {
@@ -43,6 +46,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = payload;
       });
+
     builder
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -58,6 +62,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = payload;
       });
+
     builder
       .addCase(getCurrentUser.pending, (state) => {
         state.loading = true;
@@ -65,16 +70,14 @@ const authSlice = createSlice({
       })
       .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
         state.loading = false;
-
         state.user = payload.user;
-        instance.defaults.headers[
-          "Authorization"
-          ] = `Bearer ${payload.accessToken}`;
+        instance.defaults.headers["Authorization"] = `Bearer ${payload.accessToken}`;
       })
       .addCase(getCurrentUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });
+
     builder
       .addCase(logoutUser.pending, (state) => {
         state.loading = true;
@@ -90,6 +93,7 @@ const authSlice = createSlice({
         state.accessToken = null;
         state.refreshToken = null;
       });
+
     builder
       .addCase(refreshUser.pending, (state) => {
         state.loading = true;
@@ -97,9 +101,7 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.fulfilled, (state, { payload }) => {
         state.accessToken = payload.accessToken;
-        instance.defaults.headers[
-          "Authorization"
-        ] = `Bearer ${payload.accessToken}`;
+        instance.defaults.headers["Authorization"] = `Bearer ${payload.accessToken}`;
       })
       .addCase(refreshUser.rejected, (state, { payload }) => {
         state.loading = false;
@@ -111,5 +113,5 @@ const authSlice = createSlice({
   },
 });
 
-export const {updateAuthUser} = authSlice.actions;
+export const { updateAuthUser, resetRegisterSuccess } = authSlice.actions;
 export default authSlice.reducer;

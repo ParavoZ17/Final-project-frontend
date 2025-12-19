@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import {  selectToken } from "./store/auth/authSelector"
 
 import { getCurrentUser } from "./store/auth/authOperations"
+import { ToastContainer } from "react-toastify"
 
 function App() {
  
@@ -21,12 +22,19 @@ if(isToken){
 },[dispatch,isToken])
   return (
     <div style={{
-    // maxWidth: "1440px",
     margin: "0 auto",
     width: "100%",
     backgroundColor: "#ffffff",
   }}>
      <NavigationPage/>
+       <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
     </div>
   )
 }
