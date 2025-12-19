@@ -7,6 +7,7 @@
   import profileReducer from "./profile/profileSlice.js"
   import userReducer from "./user/userSlice";
   import notificationReducer from "./notifications/notificationSlice";
+  import commentsReducer from "./comments/commentsSlice.js"
 
     const persistConfig = {
       key: "auth",
@@ -22,6 +23,7 @@
       profile: profileReducer,
       user: userReducer,
       notifications: notificationReducer,
+      comments: commentsReducer,
     }); 
 
     export default rootReducer;

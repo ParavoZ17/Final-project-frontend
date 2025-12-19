@@ -5,7 +5,8 @@ const PostOptionsMenu = ({
                            open,
                            onClose,
                            onDelete,
-                           onEdit
+                           onEdit,
+                           postId
                          }) => {
   useEffect(() => {
     if (!open) return;
@@ -32,7 +33,7 @@ const PostOptionsMenu = ({
         <button className={`${styles.item} ${styles.danger}`} onClick={onDelete}>
           Delete
         </button>
-        <button className={styles.item} onClick={onEdit}>
+        <button className={styles.item} onClick={() => onEdit(postId)} >
           Edit
         </button>
         <button className={styles.item} onClick={onClose}>

@@ -38,6 +38,7 @@ export const fetchPostById = createAsyncThunk(
   }
 );
 
+
 export const updatePost = createAsyncThunk(
   "posts/update",
   async ({id, payload}, {rejectWithValue}) => {
@@ -49,6 +50,7 @@ export const updatePost = createAsyncThunk(
     }
   }
 );
+
 
 export const deletePost = createAsyncThunk(
   "posts/delete",

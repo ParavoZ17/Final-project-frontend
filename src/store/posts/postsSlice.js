@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   posts: [],
-  selectedPost: null, 
+  selectedPost: null,
   loading: false,
   error: null,
 };
@@ -37,7 +37,6 @@ const postsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // CREATE POST
       .addCase(createPost.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -51,7 +50,6 @@ const postsSlice = createSlice({
         state.error = payload;
       })
 
-      // FETCH ALL POSTS
       .addCase(fetchAllPosts.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -64,8 +62,6 @@ const postsSlice = createSlice({
         state.loading = false;
         state.error = payload;
       })
-
-      // FETCH POST BY ID
       .addCase(fetchPostById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -79,14 +75,12 @@ const postsSlice = createSlice({
         state.error = payload;
       })
 
-      // UPDATE POST
       .addCase(updatePost.fulfilled, (state, {payload}) => {
         const index = state.posts.findIndex((p) => p._id === payload._id);
         if (index !== -1) state.posts[index] = payload;
         if (state.selectedPost?._id === payload._id) state.selectedPost = payload;
       })
 
-      // DELETE POST
       .addCase(deletePost.fulfilled, (state, {payload}) => {
         state.posts = state.posts.filter((p) => p._id !== payload._id);
         if (state.selectedPost?._id === payload._id) state.selectedPost = null;
