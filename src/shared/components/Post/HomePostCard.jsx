@@ -5,6 +5,7 @@ import {CommentsIcon} from "../../../assets/svg"
 import ViewPost  from "./ViewPost/ViewPost";
 import {timeAgo} from "../../utils/timeAgo";
 import LikeButton from "../Button/LikeButton.jsx";
+import FollowButton from "../Button/FollowButton.jsx";
 
 const HomePostCard = ({post}) => {
   const {openModal} = useOutletContext();
@@ -22,10 +23,12 @@ const HomePostCard = ({post}) => {
             {post.author?.username || "user"}
           </span>
           </Link>
-          <span className={style.dot}>•</span>
+          <span className={style.time}>•</span>
           <span className={style.time}>
             {timeAgo(post.createdAt)}
           </span>
+          <span className={style.time}>•</span>
+          <FollowButton author={post.author} />
         </div>
       </div>
 

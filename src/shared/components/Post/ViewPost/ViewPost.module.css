@@ -145,7 +145,7 @@
 }
 
 .like {
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .form {
@@ -161,7 +161,7 @@
     border: 1px solid #ddd;
 }
 
-.form button {
+.form button[type="submit"] {
     border: none;
     background: #000;
     color: #fff;
@@ -183,4 +183,18 @@
     .imageWrap {
         height: 45vh;
     }
+}
+
+.emojiBtn {
+  background: inherit;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.emojiPicker {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  z-index: 10;
 }

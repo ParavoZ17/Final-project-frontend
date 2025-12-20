@@ -40,3 +40,21 @@
   min-height: 0;
   overflow: hidden;
 }
+.emojiWrap {
+  position: relative;
+  margin-top: 8px;
+}
+
+.emojiBtn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.emojiPicker {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  z-index: 10;
+}

@@ -7,14 +7,14 @@ import { timeAgo } from "../../../utils/timeAgo";
 import LikeButton from "../../Button/LikeButton.jsx";
 import { fetchComments } from "../../../../store/comments/commentsSlice";
 import { updatePost } from "../../../../store/posts/postsOperations";
-
+import EmojiPicker from "emoji-picker-react";
 
 const EditPost = ({ post, closeEdit }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.comments.comments);
 
   const [text, setText] = useState(post.content || "");
-
+  const [showEmoji, setShowEmoji] = useState(false);
   useEffect(() => {
     if (post?._id) {
       dispatch(fetchComments({ postId: post._id }));
@@ -25,13 +25,21 @@ const EditPost = ({ post, closeEdit }) => {
     await dispatch(updatePost({ id: post.id, payload: { content: text } }));
     closeEdit();
   };
+  const handleEmojiClick = (emojiData) => {
+    setText((prev) => prev + emojiData.emoji);
+  };
 
   return (
     <div className={style.wrapper}>
       <div className={style.layout}>
         {/* Ліва частина: фото */}
         <div className={style.imageWrap}>
-          <img src={post.images} alt="" className={style.image} draggable={false} />
+          <img
+            src={post.images}
+            alt=""
+            className={style.image}
+            draggable={false}
+          />
         </div>
 
         {/* Права частина */}
@@ -43,31 +51,50 @@ const EditPost = ({ post, closeEdit }) => {
               onClick={closeEdit}
             >
               <div className={style.avatar}>
-                {post?.author?.avatar && <img src={post.author.avatar} alt="" />}
+                {post?.author?.avatar && (
+                  <img src={post.author.avatar} alt="" />
+                )}
               </div>
               <div className={style.author}>
                 <div className={style.name}>{post.author.username}</div>
               </div>
             </Link>
 
-            {/* Кнопки Save і Cancel */}
             <div className={style.editButtons}>
-              <Button variant="primary" onClick={handleSave}>Save</Button>
-              <Button variant="secondary" onClick={closeEdit}>Cancel</Button>
+              <Button variant="primary" onClick={handleSave}>
+                Save
+              </Button>
+              <Button variant="secondary" onClick={closeEdit}>
+                Cancel
+              </Button>
             </div>
           </div>
 
-          {/* Інпут для редагування посту */}
-          <textarea
-            className={style.editInput}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            rows={4}
-          />
+          <div className={style.editInputWrap}>
+            <textarea
+              className={style.editInput}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              rows={4}
+            />
+            <button
+              type="button"
+              className={style.emojiBtn}
+              onClick={() => setShowEmoji((prev) => !prev)}
+            >
+              😊
+            </button>
+            {showEmoji && (
+              <div className={style.emojiPicker}>
+                <EmojiPicker onEmojiClick={handleEmojiClick} />
+              </div>
+            )}
+          </div>
 
-          {/* Коментарі */}
           <div className={style.comments}>
-            {comments.length === 0 && <div className={style.empty}>Пока нет комментариев</div>}
+            {comments.length === 0 && (
+              <div className={style.empty}>Пока нет комментариев</div>
+            )}
             {comments.map((c) => (
               <div key={c.id || c._id} className={style.comment}>
                 <div className={style.commentAvatar}>
@@ -77,7 +104,9 @@ const EditPost = ({ post, closeEdit }) => {
                   <div className={style.commentText}>
                     <b>{c.user?.username}</b> {c.content}
                   </div>
-                  <div className={style.commentTime}>{timeAgo(c.createdAt)}</div>
+                  <div className={style.commentTime}>
+                    {timeAgo(c.createdAt)}
+                  </div>
                 </div>
               </div>
             ))}

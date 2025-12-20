@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import EmojiPicker from "emoji-picker-react";
+
 import { Link } from "react-router-dom";
 import style from "./ViewPost.module.css";
 import PostOptionsMenu from "./PostOptionsMenu";
@@ -21,6 +23,7 @@ const ViewPost = ({ postId, closeModal }) => {
   const authUser = useSelector(selectUser);
   const comments = useSelector((state) => state.comments.comments);
 
+  const [showEmoji, setShowEmoji] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [text, setText] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -49,6 +52,10 @@ const ViewPost = ({ postId, closeModal }) => {
   const handleEdit = () => {
     setMenuOpen(false);
     setIsEditing(true);
+  };
+
+  const handleEmojiClick = (emojiData) => {
+    setText((prev) => prev + emojiData.emoji);
   };
 
   if (isEditing) {
@@ -131,6 +138,13 @@ const ViewPost = ({ postId, closeModal }) => {
             </div>
 
             <form className={style.form} onSubmit={handleAddComment}>
+              <button
+                type="button"
+                onClick={() => setShowEmoji((prev) => !prev)}
+                className={style.emojiBtn}
+              >
+                😊
+              </button>
               <input
                 value={text}
                 onChange={(e) => setText(e.target.value)}
@@ -139,6 +153,11 @@ const ViewPost = ({ postId, closeModal }) => {
               <button type="submit" disabled={!text.trim()}>
                 Send
               </button>
+              {showEmoji && (
+                <div className={style.emojiPicker}>
+                  <EmojiPicker onEmojiClick={handleEmojiClick} />
+                </div>
+              )}
             </form>
           </div>
         </div>

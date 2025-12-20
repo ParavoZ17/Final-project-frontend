@@ -1,15 +1,14 @@
 .followBtn {
-    height: 32px;
-    padding: 0 45px;
-    color: #fff;
+    padding: 0 15px;
+    color: #0095f6;
     border-radius: 8px;
-    border: 1px solid #e5e7eb;
-    background: #0095f6;
+    border: none;
+    background: inherit;
     font-weight: 600;
     cursor: pointer;
 }
 
 .following {
-    background: #f0f2f5;
+    
     color: #000;
 }

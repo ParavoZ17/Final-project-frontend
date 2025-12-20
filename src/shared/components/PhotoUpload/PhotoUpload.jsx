@@ -1,16 +1,22 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import style from "./PhotoUpload.module.css";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../store/auth/authSelector";
 import ProfileIcon from "../../../assets/svg/Profile";
+import EmojiPicker from "emoji-picker-react";
 
 export default function PhotoUpload({ files, setFiles, content, setContent, wasSubmitted }) {
   const user = useSelector(selectUser);
   const inputRef = useRef();
+  const [showEmoji, setShowEmoji] = useState(false);
 
   const handleFileChange = (e) => {
     const selectedFiles = e.target.files;
     setFiles(selectedFiles ? Array.from(selectedFiles) : []);
+  };
+
+  const handleEmojiClick = (emojiData) => {
+    setContent((prev) => prev + emojiData.emoji);
   };
 
   return (
@@ -69,6 +75,23 @@ export default function PhotoUpload({ files, setFiles, content, setContent, wasS
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
+
+        {/* Кнопка emoji */}
+        <div className={style.emojiWrap}>
+          <button
+            type="button"
+            className={style.emojiBtn}
+            onClick={() => setShowEmoji((prev) => !prev)}
+          >
+            😊
+          </button>
+
+          {showEmoji && (
+            <div className={style.emojiPicker}>
+              <EmojiPicker onEmojiClick={handleEmojiClick} />
+            </div>
+          )}
+        </div>
 
         {wasSubmitted && !content.trim() && (
           <div className={style.error}>Caption needed...</div>

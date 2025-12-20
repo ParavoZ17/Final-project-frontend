@@ -22,6 +22,6 @@ const ExploreCard = ({ post }) => {
       </div>
     </Link>
   );
-}
+};
 
 export default ExploreCard;
